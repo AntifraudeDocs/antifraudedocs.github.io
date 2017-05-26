@@ -6,3 +6,4 @@
 [Configuração do Fingerprint ]({{ site.baseurl }}{% link docs/1.0/fingerprint.md %}) 
 [Retroalimentação de Chargeback ]({{ site.baseurl }}{% link docs/1.0/retrochargeback.md %}) 
 [Associar transação Pagador e Antifraude ]({{ site.baseurl }}{% link docs/1.0/linktransaction.md %}) 
+
