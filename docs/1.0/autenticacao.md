@@ -42,7 +42,8 @@ Este documento descreve o fluxo necessário para que aplicações **cliente** ob
 * Uma vez em posse dessas credenciais, será necessário "codificá-la" em  Base64, utilizando a convenção **"usuario:senha"**.
 <br/>Exemplo:
 
-    * User: braspagtestes Password: 1q2w3e4r
+    * User: braspagtestes
+    * Password: 1q2w3e4r
     * String a ser codificada em Base 64: **braspagtestes:1q2w3e4r**
     * Resultado: YnJhc3BhZ3Rlc3RlczoxcTJ3M2U0cg==
 

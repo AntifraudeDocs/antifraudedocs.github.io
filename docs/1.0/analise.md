@@ -12,7 +12,7 @@ Esta página descreve os campos do contrato do Antifraude Gateway, além de cont
   
 <a name="contract"></a>
   
-## Campos do Contrato
+## Atributos
 -----------------------------------
 
 **MerchantOrderId**{:.custom-attrib}  `required`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
@@ -27,12 +27,12 @@ Valor da transação financeira a ser analisada.
 Ex.: 123456 Valor equivalente a R$1.234,56)
 
 **Currency**{:.custom-attrib} `required`{:.custom-tag} `3`{:.custom-tag} `string`{:.custom-tag}  
-Moeda no formato ISSO 4217  
-Ex.: BRL (Real Brasileiro)
+Moeda. Mais informações em [ISO 4217 - Currency Codes](https://www.iso.org/iso-4217-currency-codes.html)
+Ex.: BRL (Real Brasileiro) | USD(Dólar Americano)
 
 **Provider**{:.custom-attrib} `required`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag}  
 Nome do Provedor da Solução de Analise de Fraude.  
-Ex.: ReDShield
+Enum.: ReDShield
 
 **OrderDate**{:.custom-attrib} `required`{:.custom-tag} `datetime`{:.custom-tag}  
 Data do pedido.  
@@ -41,6 +41,16 @@ Ex.: 2016-12-09T19:16:38.155Z
 **BraspagTransactionId**{:.custom-attrib} `optional`{:.custom-tag} `Guid`{:.custom-tag}  
 Id da transação no Pagador da Braspag.  
 Ex.: ED3B6646-5B6E-451C-B3CF-4FF5E807CB69
+
+**SplitingPaymentMethod**{:.custom-attrib} `optional`{:.custom-tag} `23`{:.custom-tag} `string`{:.custom-tag}  
+Identifica se a autorização da transação é com um ou dois cartões ou com mais de um meio de pagamento, por exemplo, cartão de crédito e boleto bancário.  
+Enum:  
+None -> Pagamento com um cartão apenas.  
+CardSplit -> Pagamento com mais de um cartão.  
+MixedPaymentMethodSplit -> Pagamento com mais de um meio de pagamento.  
+
+**IsRetryTransaction**{:.custom-attrib} `optional`{:.custom-tag} `bool`{:.custom-tag}  
+Identifica que é uma retentativa de uma análise. Este campo deve ser enviado com valor igual a TRUE quando o código de retorno na primeira tentativa for igual a BP900, que identifica timeout entre Braspag e o Provedor. Este campo deve ser enviado somente quando Provedor igual a ReDShield.  
 
 **CardData.Number**{:.custom-attrib}  `required`{:.custom-tag} `19`{:.custom-tag} `string`{:.custom-tag}  
 Número do cartão de crédito.
@@ -130,9 +140,9 @@ Número do telefone de trabalho do responsável a receber o produto no endereço
 **ShippingData.Mobile**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 Número do celular do responsável a receber o produto no endereço de entrega.
 
-**ShippingData.ShippingMethod**{:.custom-attrib}  `optional`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
+**ShippingData.ShippingMethod**{:.custom-attrib}  `optional`{:.custom-tag} `27`{:.custom-tag} `string`{:.custom-tag}  
 Meio de entrega.  
-Ex.: None | SameDay | NexDay | TwoDay | ThreeDay | LowCost | CarrierDesignatedByCustomer | Pickup | International | Military | Other
+Enum: None | SameDay | NexDay | TwoDay | ThreeDay | LowCost | CarrierDesignatedByCustomer | Pickup | International | Military | Other
 
 **ShippingData.Comment**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 Referências do endereço de entrega.
@@ -154,8 +164,9 @@ Nome do meio do comprador.
 Data de nascimento do comprador.  
 Ex.: 1983-10-01T00:00:00.000Z
 
-**CustomerData.Gender**{:.custom-attrib}  `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
+**CustomerData.Gender**{:.custom-attrib}  `optional`{:.custom-tag} `6`{:.custom-tag} `string`{:.custom-tag}  
 Sexo do comprador.  
+Enum: Male | Female
 
 **CustomerData.Identity**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 Identidade do comprador.
@@ -182,9 +193,9 @@ Telefone de trabalho do comprador.
 Impressão digital de dispositivos e geolocalização real do IP do comprador.  
 [Configuração do Fingerprint]({{ site.baseurl }}{% link docs/1.0/fingerprint.md %})
 
-**CustomerData.Status**{:.custom-attrib}  `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
+**CustomerData.Status**{:.custom-attrib}  `optional`{:.custom-tag} `8`{:.custom-tag} `string`{:.custom-tag}  
 Status do comprador na loja.  
-Ex.: NEW | EXISTING
+Enum.: New | Existing
 
 **CartItem[n].ProductName**{:.custom-attrib}  `optional`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
 Nome do produto.
@@ -212,9 +223,9 @@ Mensagem de presente.
 **CartItem[n].ShippingInstructions**{:.custom-attrib}  `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
 Instruções de entrega do produto.
 
-**CartItem[n].ShippingMethod**{:.custom-attrib}  `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
+**CartItem[n].ShippingMethod**{:.custom-attrib}  `optional`{:.custom-tag} `27`{:.custom-tag} `string`{:.custom-tag}  
 Meio entrega do produto.  
-Ex.: None | SameDay | NexDay | TwoDay | ThreeDay | LowCost | CarrierDesignatedByCustomer | Pickup | International | Military | Other
+Enum: None | SameDay | NexDay | TwoDay | ThreeDay | LowCost | CarrierDesignatedByCustomer | Pickup | International | Military | Other
 
 **CartItem[n].ShippingTranckingNumber**{:.custom-attrib}  `optional`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
 Número de ratreamento do produto.
@@ -223,17 +234,13 @@ Número de ratreamento do produto.
 Id do serviço no sistema de risco. Esse campo geralmente é definido por alguma configuração, mas em algumas situações, você pode querer usar a opção baseada em solicitação dinâmica.
 Para o ReDShield isso define qual serviço de triagem de fraude deve ser usado.
 
-**CustomerConfigurationData.RiskAmount**{:.custom-attrib}  `optional`{:.custom-tag} `long`{:.custom-tag}  
-Valor de risco do pedido.  
-Ex.: 1090 (Valor equivalente a R$10,90)
-
 **CustomerConfigurationData.RiskBrand**{:.custom-attrib}  `optional`{:.custom-tag} `50`{:.custom-tag} `long`{:.custom-tag}  
 Bandeira de risco do pedido.  
 
 **CustomerConfigurationData.Website**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 Website da loja.
 
-**CustomerConfigurationData.AccessTokenS**{:.custom-attrib}  `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
+<!--**CustomerConfigurationData.AccessTokenS**{:.custom-attrib}  `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  -->
 
 **MerchantDefinedData.Key**{:.custom-attrib}  `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
 Campo definido junto ao provider.
@@ -249,9 +256,9 @@ Ex.: SFO-JFK:JFK-LHR:LHR-CDG
 Data de partida do vôo.  
 Ex.: 2017-03-01T15:10:00.000Z
 
-**TravelData.JouneyType**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
+**TravelData.JourneyType**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 Tipo de viagem.  
-Ex.: Só ida | Ida e Volta.  
+Enum.: OneWayTrip | RoundTrip.  
 
 **TravelData.TravelLeg[n].Origin**{:.custom-attrib}  `optional`{:.custom-tag} `5`{:.custom-tag} `string`{:.custom-tag}  
 Código do aeroporto de origem da viagem.  
@@ -278,12 +285,12 @@ Ex.: 1985-07-22T00:00:00.000Z
 ID do passageiro a quem o passageiro foi emitido.  
 
 **PassengerData[n].Status**{:.custom-attrib} `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag}  
-Classificação da empresa aérea.
-Ex.: Gold | Platinum
+Classificação da empresa aérea.  
+Enum.: Gold | Platinum
 
 **PassengerData[n].PassengerType**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
 Tipo do passageiro.  
-Ex.: Adult | Child | Infant | Youth | Student | SeniorCitizen | Military
+Enum.: Adult | Child | Infant | Youth | Student | SeniorCitizen | Military
 
 **PassengerData[n].Email**{:.custom-attrib} `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 E-mail do passageiro.
@@ -328,6 +335,9 @@ Content-Type: application/json
   "Currency": "BRL",
   "Provider": "RedShield",
   "OrderDate": "2016-12-09",
+  "BraspagTransactionId":"a3e08eb2-2144-4e41-85d4-61f1befc7a3b",
+  "SplitingPaymentMethod": "None",
+  "IsRetryTransaction": false,
   "Card": {
   "Number" : "4000111231110112",
     "Holder": "Fernando Test",
@@ -360,13 +370,13 @@ Content-Type: application/json
         "MiddleName": "Souza",
         "LastName": "Figueiredo",
         "ShippingMethod": "SameDay",
-        "Phone": "12315454-8787878",
-        "WorkPhone": "123456789-78945612",
-        "Mobile": "987456-123456",
+        "Phone": "21-21114700",
+        "WorkPhone": "21-21114721",
+        "Mobile": "21-998765432",
         "Comment": "Em frente ao 322."
     },
   "Customer": {
-        "MerchantCustomerId": "baa0e542-bf10-4e03-9cda-c660c3246650",
+        "MerchantCustomerId": "10050665740",
         "FirstName": "Fernando",
         "MiddleName": "Souza",
         "LastName": "Figueiredo",
@@ -412,10 +422,8 @@ Content-Type: application/json
   ],
   "CustomConfiguration": {
     "ServiceId": "0",
-    "RiskAmount": 0,
     "RiskBrand": "0",
-    "MerchantWebsite": "www.test.com",
-    "AccountTokenS": "acc123"
+    "MerchantWebsite": "www.test.com"
   },
   "MerchantDefinedData": [
     {
@@ -426,7 +434,7 @@ Content-Type: application/json
   "Travel": {
     "CompleteRoute": "GIG-CGH-EZE",
     "DepartueTime": "2016-12-10",
-    "JouneyType": "JT",
+    "JourneyType": "OneWayTrip",
     "TravelLegs": [
       {
         "Origin": "GIG",
@@ -447,7 +455,7 @@ Content-Type: application/json
       "Status": "NEW",
       "PassengerType": "Adult",
       "Email": "ffigueiredo@braspag.com.br",
-    "Phone" : "984554545454545",
+      "Phone" : "21-21114721",
       "DateOfBirth": "1982-04-30 17:00:00"
     }
   ]
@@ -476,6 +484,9 @@ Content-Type: application/json;charset=UTF-8
   "Currency": "BRL",
   "Provider": "RedShield",
   "OrderDate": "2016-12-09",
+  "BraspagTransactionId":"a3e08eb2-2144-4e41-85d4-61f1befc7a3b",
+  "SplitingPaymentMethod": "None",
+  "IsRetryTransaction": false,
   "Card": {
   "Number" : "4000111231110112",
     "Holder": "Fernando Test",
@@ -508,13 +519,13 @@ Content-Type: application/json;charset=UTF-8
         "MiddleName": "Souza",
         "LastName": "Figueiredo",
         "ShippingMethod": "SameDay",
-        "Phone": "12315454-8787878",
-        "WorkPhone": "123456789-78945612",
-        "Mobile": "987456-123456",
+        "Phone": "21-21114700",
+        "WorkPhone": "21-21114721",
+        "Mobile": "21-998765432",
         "Comment": "Em frente ao 322."
     },
   "Customer": {
-        "MerchantCustomerId": "baa0e542-bf10-4e03-9cda-c660c3246650",
+        "MerchantCustomerId": "10050665740",
         "FirstName": "Fernando",
         "MiddleName": "Souza",
         "LastName": "Figueiredo",
@@ -523,9 +534,9 @@ Content-Type: application/json;charset=UTF-8
         "Identity": "38303106171",
         "IdentityType": "1",
         "Email": "ffigueiredo@braspag.com.br",
-        "Phone": "12315454-8787878",
-        "WorkPhone": "123456789-78945612",
-        "Mobile": "987456-123456",
+        "Phone": "21-21114700",
+        "WorkPhone": "21-21114721",
+        "Mobile": "21-998765432",
         "Ip": "127.0.0.1",
         "BrowserFingerprint": "04003hQUMXGB0poNf94lis1ztuLYRFk+zJ17aP79a9O8mWOBmEnKs6ziAo94ggAtBvKEN6/FI8Vv2QMAyHLnc295s0Nn8akZzRJtHwsEilYx1P+NzuNQnyK6+7x2OpjJZkl4NlfPt7h9d96X/miNlYT65UIY2PeH7sUAh9vKxMn1nlPu2MJCSi12NBBoiZbfxP1Whlz5wlRFwWJi0FRulruXQQGCQaJkXU7GWWZGI8Ypycnf7F299GIR12G/cdkIMFbm6Yf0/pTJUUz1vNp0X2Zw8QydKgnOIDKXq4HnEqNOos1c6njJgQh/4vXJiqy0MXMQOThNipDmXv9I185O+yC2f3lLEO0Tay66NZEyiLNePemJKSIdwO9O5ZtntuUkG6NTqARuHStXXfwp8cyGF4MPWLuvNvEfRkJupBy3Z8hSEMEK7ZWd2T2HOihQxRh4qp+NANqYKBTl3v6fQJAEKikeSQVeBN8sQqAL0BZFaIMzbrnMivi6m6JRQUIdvEt+MbJEPFc0LjRycC5ApUmJO+Aoo9VKL1B8ftMSQ1iq1uTKn16ZOmDpzZrZhMPbH83aV0rfB2GDXcjpghm9klVFOw7EoYzV7IDBIIRtgqG9KZ+8NH/z6D+YNUMLEUuK1N2ddqKbS5cKs2hplVRjwSv7x8lMXWE7VDaOZWB8+sD1cMLQtEUC0znzxZ4bpRaiSy4dJLxuJpQYAFUrDlfSKRv/eHV3QiboXLuw9Lm6xVBK8ZvpD5d5olGQdc+NgsqjFnAHZUE+OENgY4kVU9wB84+POrI4MkoD4iHJ5a1QF8AZkZDFo1m1h9Bl+J2Ohr6MkBZq8DG5iVaunHfxUdHou5GL7lS1H7r+8ctfDXi8AfOPjzqyODJQ74Aiel35TKTOWG8pq1WO6yzJ1GNmMuMWZBamlGXoG/imnjwHY9HQtQzpGfcm0cR8X2Fd1ngNFGLDGZlWOX0jWtOwU6XVGT37JFD9W/cx4kzI+mPNi65X5WFPYlDG9N0Lbh5nOj3u3DXqRCiKCUrsEkMt8z9fxO9pLLGVQUKIYR2wTw53CiWK96FOpPevDWtH2XR0QkfOd02D73n81x6hEMCy0s3hRLn08Th9FlNHDMJBqLj+Tz8rG2TtNki3mJC7Ass1MT2qnKBI77n6vsQkAp59TfbZm/tBXwAoYdLJXge8F/numhd5AvQ+6I8ZHGJfdN3qWndvJ2I7s5Aeuzb8t9//eNsm73fIa05XreFsNyfOq1vG2COftC6EEsoJWe5h5Nwu1x6PIKuCaWxLY+npfWgM0dwJPmSgPx7TNM31LyVNS65m83pQ+qMTRH6GRVfg7HAcS5fnS/cjdbgHxEkRmgkRq1Qs48sbX9QC8nOTD0ntb6FcJyEOEOVzmJtDqimkzDq+SXR1/63AYe4LEj+ogRgN+Z8HAFhGFzd/m6snVviELfRqJ4LLQIk9Y/fzqnsF6I5OGxfdT2sxxK2Vokpi3jWhCcEknw7dYlHYpOnCHZO7QVgjQTngF2mzKf4GeOF4ECFsWTgLy6HFEitfauYJt1Xh1NfZZerBMwXLFzdhzoTQxGlcXc8lZIoEG1BLYv/ScICf8Ft9PEtpEa+j0cDSlU99UoH2xknwR1W9MRGc5I/euE63/IMJTqguZ3YcnJpjSVnAGSpyz/0gKjypJ3L86rHFRGXt0QbmaXtSl2UmmjI0p0LCCdx7McatCFEVI6FwPpPV0ZSMv/jM75eBid1X/lTV4XNzjowzR/iFlKYMzHZtVO9hCBPKlTwblRXNn4MlvNm/XeSRQ+Mr0YV5w5CL5Z/tGyzqnaLPj/kOVdyfj8r2m5Bcrz4g/ieUIo8qRFv2T2mET46ydqaxi27G4ZYHj7hbiaIqTOxWaE07qMCkJw==",
         "Status": "NEW"
@@ -560,10 +571,8 @@ Content-Type: application/json;charset=UTF-8
   ],
   "CustomConfiguration": {
     "ServiceId": "0",
-    "RiskAmount": 0,
     "RiskBrand": "0",
-    "MerchantWebsite": "www.test.com",
-    "AccountTokenS": "acc123"
+    "MerchantWebsite": "www.test.com"
   },
   "MerchantDefinedData": [
     {
@@ -574,7 +583,7 @@ Content-Type: application/json;charset=UTF-8
   "Travel": {
     "CompleteRoute": "GIG-CGH-EZE",
     "DepartueTime": "2016-12-10",
-    "JouneyType": "JT",
+    "JourneyType": "OneWayTrip",
     "TravelLegs": [
       {
         "Origin": "GIG",
@@ -595,12 +604,10 @@ Content-Type: application/json;charset=UTF-8
       "Status": "NEW",
       "PassengerType": "Adult",
       "Email": "ffigueiredo@braspag.com.br",
-    "Phone" : "984554545454545",
+      "Phone": "21-21114700",
       "DateOfBirth": "1982-04-30 17:00:00"
     }
-  ],
-  "SplitingPaymentMethod": "Undefined",
-  "IsRetryTransaction": false
+  ]
 }
 ```
   
@@ -638,7 +645,6 @@ Content-Type: application/json;charset=UTF-8
     "Id": "2ab5e829-edf1-e611-9414-0050569318a7",
     "CreatedDate": "2017-02-13T11:06:04.98",
     "ProviderCode": "100.400.148",
-    "Status": 3,
     "Message": "Payment void and transaction challenged by ReD Shield",
     "ProviderOrderId": "487931363026"
   },
@@ -653,7 +659,7 @@ Content-Type: application/json;charset=UTF-8
   "MerchantOrderId": "4493d42c-8732-4b13-aadc-b07e89732c26",
   "Currency": "BRL",
   "ProviderTransactionId": "8a8394865a353cc4015a37947c5f7e35",
-  "SplitingPaymentMethod": 0,
+  "SplitingPaymentMethod": "None",
   "IsRetryTransaction": false
 }
 ```

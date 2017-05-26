@@ -2,7 +2,6 @@
 layout: post-full
 title: Autenticação
 featimg: AntifraudeAuthentication.png
-tags: [autenticacao]
 category: [docs]
 ---
 
