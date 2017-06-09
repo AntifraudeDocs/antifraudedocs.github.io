@@ -9,7 +9,11 @@ next: /docs/1.0/postnotification
 
 Esta página descreve os campos do contrato do Antifraude Gateway, além de conter exemplos de requisições HTTP.  
 
-  
+## Hosts
+
+**Test** https://riskhomolog.braspag.com.br  
+**Live** https://risk.braspag.com.br
+
 <a name="contract"></a>
   
 ## Atributos
@@ -45,7 +49,7 @@ Id da transação no Pagador da Braspag.
 Ex.: ED3B6646-5B6E-451C-B3CF-4FF5E807CB69  
 Obs.: Se o fluxo implementado ao seu negócio for a primeira chamada para fazer a análise de fraude atravpes do Antifraude Gateway e a segunda for a autorização através do Pagador, realizar uma terceira chamada para que as transações do Antifraude Gateway e Pagador sejam vinculadas. Para mais detalhes acessar: [Associar transação Pagador e Antifraude]({{ site.baseurl }}{% link docs/1.0/linktransaction.md %})  
 
-**SplitingPaymentMethod**{:.custom-attrib} `default = None`{:.custom-tag}.`optional`{:.custom-tag} `23`{:.custom-tag} `string`{:.custom-tag}  
+**SplitingPaymentMethod**{:.custom-attrib} `default = None`{:.custom-tag} `optional`{:.custom-tag} `23`{:.custom-tag} `string`{:.custom-tag}  
 Identifica se a autorização da transação é com um ou dois cartões ou com mais de um meio de pagamento, por exemplo, cartão de crédito e boleto bancário.  
 Enum:  
 None -> Pagamento com um cartão apenas.  
@@ -55,23 +59,23 @@ MixedPaymentMethodSplit -> Pagamento com mais de um meio de pagamento.
 **IsRetryTransaction**{:.custom-attrib} `default = false`{:.custom-tag} `optional`{:.custom-tag} `bool`{:.custom-tag}  
 Identifica que é uma retentativa de uma análise. Este campo deve ser enviado com valor igual a TRUE quando o código de retorno na primeira tentativa for igual a BP900, que identifica timeout entre Braspag e o Provedor. Este campo deve ser enviado somente quando Provedor igual a ReDShield.  
 
-**Card.Number**{:.custom-attrib}  `required`{:.custom-tag} `19`{:.custom-tag} `string`{:.custom-tag}  
+**Card.Number**{:.custom-attrib} `required`{:.custom-tag} `19`{:.custom-tag} `string`{:.custom-tag}  
 Número do cartão de crédito.
 
-**Card.Holder**{:.custom-attrib}  `required`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
+**Card.Holder**{:.custom-attrib} `required`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
 Nome do cartão de crédito.  
 
-**Card.ExpirationDate**{:.custom-attrib}  `required`{:.custom-tag} `7`{:.custom-tag} `string`{:.custom-tag}  
+**Card.ExpirationDate**{:.custom-attrib} `required`{:.custom-tag} `7`{:.custom-tag} `string`{:.custom-tag}  
 Data de expiração do cartão de crédito.  
 Ex.: 01/2023
 
-**Card.CVV**{:.custom-attrib}  `required`{:.custom-tag} `4`{:.custom-tag} `string`{:.custom-tag}  
+**Card.CVV**{:.custom-attrib} `required`{:.custom-tag} `4`{:.custom-tag} `string`{:.custom-tag}  
 Código de segurança do cartão de crédito.  
 
-**Card.Brand**{:.custom-attrib}  `required`{:.custom-tag} `10`{:.custom-tag} `string`{:.custom-tag}  
+**Card.Brand**{:.custom-attrib} `required`{:.custom-tag} `10`{:.custom-tag} `string`{:.custom-tag}  
 Bandeira do cartão de crédito.  
 
-**Card.EciThreeDSecure**{:.custom-attrib}  `optional`{:.custom-tag} `10`{:.custom-tag} `string`{:.custom-tag}  
+**Card.EciThreeDSecure**{:.custom-attrib}  `optional`{:.custom-tag} `1`{:.custom-tag} `string`{:.custom-tag}  
 Código do ECI (Eletronic Commerce Indicator) de autenticação  
 
 **Card.Token**{:.custom-attrib}  `optional`{:.custom-tag} `Guid`{:.custom-tag}  
@@ -318,47 +322,47 @@ Obs2.: Já existem 2 campos além dos 15 disponíveis, que a loja poderá enviar
      - Segment = Código do segmento do lojista (MCC). Caso o mesmo se encaixe em mais de um segmento, enviar o código do segmento principal que a loja atua.  
      - MerchantId = Identificador da loja no lojista. Este identificar não é o identificador da loja no antifraude na Braspag. Exemplo de envio, quando a loja trabalha com marketplace, onde poderá enviar o identificador da loja vendedora (Seller).  
 
-**TravelData.CompleteRoute**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
+**Travel.CompleteRoute**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 Rota completa da viagem. Concatenação das pernas (código do aeroporto) de origem e destino da viagem no formato, ORIG1-DEST1:ORIG2-DEST2.  
 Ex.: SFO-JFK:JFK-LHR:LHR-CDG
 
-**TravelData.DepartureTime**{:.custom-attrib}  `optional`{:.custom-tag} `datetime`{:.custom-tag}  
+**Travel.DepartureTime**{:.custom-attrib}  `optional`{:.custom-tag} `datetime`{:.custom-tag}  
 Data de partida do vôo.  
 Ex.: 2017-03-01T15:10:15.258Z
 
-**TravelData.JourneyType**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
+**Travel.JourneyType**{:.custom-attrib}  `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 Tipo de viagem.  
 Enum.: OneWayTrip | RoundTrip.  
 
-**TravelData.TravelLeg[n].Origin**{:.custom-attrib}  `optional`{:.custom-tag} `5`{:.custom-tag} `string`{:.custom-tag}  
+**Travel.TravelLeg[n].Origin**{:.custom-attrib}  `optional`{:.custom-tag} `5`{:.custom-tag} `string`{:.custom-tag}  
 Código do aeroporto de origem da viagem.  
 Ex.: SFO
 
-**TravelData.TravelLeg[n].Destination**{:.custom-attrib}  `optional`{:.custom-tag} `5`{:.custom-tag} `string`{:.custom-tag}  
+**Travel.TravelLeg[n].Destination**{:.custom-attrib}  `optional`{:.custom-tag} `5`{:.custom-tag} `string`{:.custom-tag}  
 Código do aeroporto de destino da viagem.  
 Ex.: JFK
 
-**PassengerData[n].FirstName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
+**Passenger[n].FirstName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
 Primeiro nome do passageiro.
 
-**PassengerData[n].MiddleName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
+**Passenger[n].MiddleName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
 Nome do meio do passageiro.
 
-**PassengerData[n].LastName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
+**Passenger[n].LastName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
 Último nome do comprador do passageiro.
 
-**PassengerData[n].DateOfBirth**{:.custom-attrib} `optional`{:.custom-tag} `datetime`{:.custom-tag}  
+**Passenger[n].DateOfBirth**{:.custom-attrib} `optional`{:.custom-tag} `date`{:.custom-tag}  
 Data de nascimento do passageiro.  
 Ex.: 1985-07-22
 
-**PassengerData[n].PassangerId**{:.custom-attrib} `optional`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
+**Passenger[n].PassangerId**{:.custom-attrib} `optional`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
 ID do passageiro a quem o passageiro foi emitido.  
 
-**PassengerData[n].Status**{:.custom-attrib} `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag}  
+**Passenger[n].Status**{:.custom-attrib} `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag}  
 Classificação da empresa aérea.  
 Enum.: Gold | Platinum  
 
-**PassengerData[n].PassengerType**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
+**Passenger[n].PassengerType**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
 Tipo do passageiro.  
 Enum:
 Adult = Adulto  
@@ -369,11 +373,15 @@ Student = Estudante
 SeniorCitizen = Idoso  
 Military = Militar  
 
-**PassengerData[n].Email**{:.custom-attrib} `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
+**Passenger[n].Email**{:.custom-attrib} `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
 E-mail do passageiro.
 
-**PassengerData[n].Phone**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
+**Passenger[n].Phone**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
 Telefone do passageiro.
+Ex.: 552121114700  
+55 = Código do País  
+21 = DDD do estado  
+21114700 = Número do Telefone  
 
 <a style="float: right;" href="#attributes"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
@@ -402,6 +410,7 @@ POST https://riskhomolog.braspag.com.br/Analysis/ HTTP/1.1
 Host: {antifraude endpoint}
 Authorization: Bearer {access_token}
 Content-Type: application/json
+MerchantId: {Id da Loja no Antifraude Gateway}
 ```
 
 ``` json
@@ -553,6 +562,7 @@ Content-Type: application/json
      **AnalysisResult.Status**  
      Status da transação no Antifraude Gateway Braspag após a análise.  
      Enum:  
+     Started = Transação recebida pela Braspag.
      Accept = Transação aceita após análise de fraude.  
      Review = Transação em revisão após análise de fraude.  
      Reject = Transação rejeitada após análise de fraude.  

@@ -12,6 +12,11 @@ ACI / ReD Shield poder recomendar regras para evitar ataques de fraude subsequen
 
 Obs.: O serviço aceita requisição POST com no máximo 100 itens na coleção.
 
+## Hosts
+
+**Test** https://riskhomolog.braspag.com.br  
+**Live** https://risk.braspag.com.br
+
 <a name="contract"></a>
   
 ## Atributos

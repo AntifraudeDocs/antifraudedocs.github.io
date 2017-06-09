@@ -11,6 +11,11 @@ A API do Antifraude Gateway utiliza o protocolo padrão de mercado OAuth 2.0 par
 
 Este documento descreve o fluxo necessário para que aplicações **cliente** obtenham tokens de acesso válidos para uso na plataforma. Caso deseje mais informações sobre o protocolo OAuth 2.0, consulte [https://oauth.net/2/](https://oauth.net/2/){:target="_blank"}.  
 
+## Hosts
+
+**Test** https://authhomolog.braspag.com.br  
+**Live** https://auth.braspag.com.br
+
 ## Fluxo para obtenção do token de acesso  
 ----------------------------------------------
 
@@ -54,6 +59,7 @@ POST https://authhomolog.braspag.com.br/oauth2/token HTTP/1.1
 Host: https://authhomolog.braspag.com.br
 Content-Type: application/x-www-form-urlencoded
 Authorization: Basic {StringCodificadaEmBase64}
+Scope: AntifraudGatewayApp
 Cache-Control: no-cache
 
 grant_type=client_credentials

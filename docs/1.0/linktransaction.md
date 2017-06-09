@@ -16,6 +16,11 @@ Serviço que associa uma transação do Pagador Braspag à uma transação do An
     
     - O 3º passo deverá ser a chamada ao a este serviço para associar a transação do Pagador à transação do Antifraude Gateway.
 
+## Hosts
+
+**Test** https://riskhomolog.braspag.com.br  
+**Live** https://risk.braspag.com.br
+
 <a name="contract"></a>
   
 ## Atributos
