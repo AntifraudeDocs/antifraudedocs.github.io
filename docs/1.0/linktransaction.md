@@ -71,7 +71,7 @@ HTTP/1.1 200 Ok
 ```
 - Quando a transação do Pagador não for informada na requisição
 ``` http
-HTTP/1.1 400 Not found
+HTTP/1.1 400 Bad Request
 ```
 - Quando a transação do Antifraude Gateway não for encontrada na base de dados
 ``` http
