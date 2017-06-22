@@ -74,6 +74,7 @@ Código de segurança do cartão de crédito.
 
 **Card.Brand**{:.custom-attrib} `required`{:.custom-tag} `10`{:.custom-tag} `string`{:.custom-tag}  
 Bandeira do cartão de crédito.  
+Bandeiras suportadas: Amex | Diners | Discover | JCB | Master | Dankort | Cartebleue | Maestro | Visa | Elo | Hipercard  
 
 **Card.EciThreeDSecure**{:.custom-attrib}  `optional`{:.custom-tag} `1`{:.custom-tag} `string`{:.custom-tag}  
 Código do ECI (Eletronic Commerce Indicator) de autenticação  
@@ -562,7 +563,7 @@ MerchantId: {Id da Loja no Antifraude Gateway}
      **AnalysisResult.Status**  
      Status da transação no Antifraude Gateway Braspag após a análise.  
      Enum:  
-     Started = Transação recebida pela Braspag.
+     Started = Transação recebida pela Braspag.  
      Accept = Transação aceita após análise de fraude.  
      Review = Transação em revisão após análise de fraude.  
      Reject = Transação rejeitada após análise de fraude.  
