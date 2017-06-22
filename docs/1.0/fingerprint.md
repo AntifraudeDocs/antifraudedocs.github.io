@@ -118,7 +118,7 @@ Adicione o Iovation Mobile SDK aos seus aplicativos para coletar informações s
 
 Arquivos e requisitos de integração do iOS  
 
-![Detalhes]({{ site.url }}/img/fingerprintios.png){: .left }{:title="Detalhes integração iOS"}  
+![Detalhes]({{ site.url }}/img/fingerprintios_1.png){: .left }{:title="Detalhes integração iOS"}  
 
 Esta versão suporta iOS 5.1.1 ou superior nos seguintes dispositivos:  
         iPhone 3GS e posterior  
@@ -130,20 +130,20 @@ Esta versão suporta iOS 5.1.1 ou superior nos seguintes dispositivos:
     1 - Baixe e descompacte o SDK  
     2 - No Xcode, arraste *iovation.framework* na área de navegação do seu projeto  
 
-![Detalhes]({{ site.url }}/img/fingerprintios2.png){: .left }{:title="Detalhes instalação SDK"}  
+![Detalhes]({{ site.url }}/img/fingerprintios_2.png){: .left }{:title="Detalhes instalação SDK"}  
 
     3 - Na caixa de diálogo que aparece:  
         Selecione *Copy items if needed* para copiar o framework para o diretório do projeto  
         Marque a caixa de seleção para os destinos nos quais você planeja usar o framework  
 
-![Detalhes]({{ site.url }}/img/fingerprintios3.png){: .left }{:title="Detalhes instalação SDK"}  
+![Detalhes]({{ site.url }}/img/fingerprintios_3.png){: .left }{:title="Detalhes instalação SDK"}  
 
     4 - Clique em Finish  
     5 - Adicione os frameworks a seguir ao destino da aplicação no XCode:  
         - *ExternalAccessory.framework*. Se você verificar que o Wireless Accessory Configuration está ativado no Xcode 6 ou superior e não precisa, desativa e adicione novamente o ExternalAccessory.framework  
         - *CoreTelephony.framework*  
 
-![Detalhes]({{ site.url }}/img/fingerprintios4.png){: .left }{:title="Detalhes instalação SDK"}  
+![Detalhes]({{ site.url }}/img/fingerprintios_4.png){: .left }{:title="Detalhes instalação SDK"}  
 
     6 - Opcionalmente, adicione esses frameworks se o seu aplicativo fizer uso deles:  
         - *AdSupport.framework*. Se o seu aplicativo exibe anúncios  
