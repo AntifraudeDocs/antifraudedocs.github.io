@@ -89,7 +89,7 @@ Obs.: Este campo pode ser enviado na análise de fraude quando se deseja salvar 
 Obs2.: Este campo pode ser enviado no lugar dos campos **Card.Number, Card.Holder, Card.ExpirationDate**, tornando-os assim como não obrigatórios. O sistema irá consumir o Cartão Protegido enviando este campo para preencher os citados.  
 Obs3.: Este campo perde em prioridade caso o campo **Card.Token** seja enviado também.  
 
-**Card.Save**{:.custom-attrib} `default = false`{:.custom-tag} `optional`{:.custom-tag} `Guid`{:.custom-tag}  
+**Card.Save**{:.custom-attrib} `default = false`{:.custom-tag} `optional`{:.custom-tag} `bool`{:.custom-tag}  
 Indica se os dados do cartão de crédito serão armazenados no Cartão Protegido. O Token gerado na plataforma Cartão Protegido associado aos dados de cartão de crédito, retornará no response da análise de fraude através campo **Card.Token**.  
 Obs.: Os seguintes campos serão salvos no Cartão Protegido: **Card.Number, Card.Holder, Card.ExpirationDate**.  
 Obs2.: A ação de salvar os dados do cartão de crédito, só será feita se a loja possuir o produto Cartão Protegido contratado.  
@@ -298,7 +298,48 @@ Other = Outro meio de entrega
 None = Sem meio de entrega, pois é um serviço ou assinatura.  
 
 **CartItem[n].ShippingTranckingNumber**{:.custom-attrib}  `optional`{:.custom-tag} `19`{:.custom-tag} `string`{:.custom-tag}  
-Número de ratreamento do produto.
+Número de rastreamento do produto.
+
+**CartItem[n].Passenger.FirstName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
+Primeiro nome do passageiro.
+
+**CartItem[n].Passenger.MiddleName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
+Nome do meio do passageiro.
+
+**CartItem[n].Passenger.LastName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
+Último nome do comprador do passageiro.
+
+**CartItem[n].Passenger.DateOfBirth**{:.custom-attrib} `optional`{:.custom-tag} `date`{:.custom-tag}  
+Data de nascimento do passageiro.  
+Ex.: 1985-07-22
+
+**CartItem[n].Passenger.PassangerId**{:.custom-attrib} `optional`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
+ID do passageiro a quem o passageiro foi emitido.  
+
+**CartItem[n].Passenger.Status**{:.custom-attrib} `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag}  
+Classificação da empresa aérea.  
+Enum.: Gold | Platinum  
+
+**CartItem[n].Passenger.PassengerType**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
+Tipo do passageiro.  
+Enum:  
+Adult = Adulto  
+Child = Criança  
+Infant = Infantil  
+Youth = Adolescente  
+Student = Estudante  
+SeniorCitizen = Idoso  
+Military = Militar  
+
+**CartItem[n].Passenger.Email**{:.custom-attrib} `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
+E-mail do passageiro.
+
+**CartItem[n].Passenger.Phone**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
+Telefone do passageiro.
+Ex.: 552121114700  
+55 = Código do País  
+21 = DDD do estado  
+21114700 = Número do Telefone  
 
 <!--**CustomerConfigurationData.ServiceId**{:.custom-attrib}  `optional`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
 Id do serviço no sistema de risco. Esse campo geralmente é definido por alguma configuração, mas em algumas situações, você pode querer usar a opção baseada em solicitação dinâmica.
@@ -341,48 +382,7 @@ Ex.: SFO
 
 **Travel.TravelLeg[n].Destination**{:.custom-attrib}  `optional`{:.custom-tag} `5`{:.custom-tag} `string`{:.custom-tag}  
 Código do aeroporto de destino da viagem.  
-Ex.: JFK
-
-**Passenger[n].FirstName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
-Primeiro nome do passageiro.
-
-**Passenger[n].MiddleName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
-Nome do meio do passageiro.
-
-**Passenger[n].LastName**{:.custom-attrib} `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  
-Último nome do comprador do passageiro.
-
-**Passenger[n].DateOfBirth**{:.custom-attrib} `optional`{:.custom-tag} `date`{:.custom-tag}  
-Data de nascimento do passageiro.  
-Ex.: 1985-07-22
-
-**Passenger[n].PassangerId**{:.custom-attrib} `optional`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag}  
-ID do passageiro a quem o passageiro foi emitido.  
-
-**Passenger[n].Status**{:.custom-attrib} `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag}  
-Classificação da empresa aérea.  
-Enum.: Gold | Platinum  
-
-**Passenger[n].PassengerType**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
-Tipo do passageiro.  
-Enum:
-Adult = Adulto  
-Child = Criança  
-Infant = Infantil  
-Youth = Adolescente  
-Student = Estudante  
-SeniorCitizen = Idoso  
-Military = Militar  
-
-**Passenger[n].Email**{:.custom-attrib} `optional`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag}  
-E-mail do passageiro.
-
-**Passenger[n].Phone**{:.custom-attrib} `optional`{:.custom-tag} `35`{:.custom-tag} `string`{:.custom-tag}  
-Telefone do passageiro.
-Ex.: 552121114700  
-55 = Código do País  
-21 = DDD do estado  
-21114700 = Número do Telefone  
+Ex.: JFK  
 
 <a style="float: right;" href="#attributes"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
@@ -395,7 +395,7 @@ Ex.: 552121114700
 Análise da transação  
 
 `GET`{:.http-get} [https://riskhomolog.braspag.com.br/Analysis/{Id}](#get_analise){:.custom-attrib}  
-Obter detalhes da Análise da transação  
+Obter detalhes da análise da transação  
 
 <a style="float: right;" href="#http_operations"><i class="fa fa-angle-double-up fa-fw"></i></a>
 
@@ -489,7 +489,18 @@ MerchantId: {Id da Loja no Antifraude Gateway}
       "Description": "Uma description do Mouse",
       "ShippingInstructions": "Proximo ao 546",
       "ShippingMethod": "SameDay",
-      "ShippingTrackingNumber": "123456"
+      "ShippingTrackingNumber": "123456",
+      "Passenger": {
+        "FirstName": "João",
+        "MiddleName": "P",
+        "LastName": "Silva",
+        "PassengerId": "1",
+        "Status": "NEW",
+        "PassengerType": "Adult",
+        "Email": "emailpassageiro@dominio.com.br",
+        "Phone" : "552121114700",
+        "DateOfBirth": "1982-04-30"
+      }
     },
     {
       "ProductName": "Teclado",
@@ -536,20 +547,7 @@ MerchantId: {Id da Loja no Antifraude Gateway}
         "Destination": "EZE"
       }
     ]
-  },
-  "Passengers": [
-    {
-      "FirstName": "João",
-      "MiddleName": "P",
-      "LastName": "Silva",
-      "PassengerId": "1",
-      "Status": "NEW",
-      "PassengerType": "Adult",
-      "Email": "emailpassageiro@dominio.com.br",
-      "Phone" : "552121114700",
-      "DateOfBirth": "1982-04-30"
-    }
-  ]
+  }
 }
 ```
 
@@ -669,7 +667,18 @@ Content-Type: application/json;charset=UTF-8
       "Description": "Uma description do Mouse",
       "ShippingInstructions": "Proximo ao 546",
       "ShippingMethod": "SameDay",
-      "ShippingTrackingNumber": "123456"
+      "ShippingTrackingNumber": "123456",
+      "Passenger": {
+        "FirstName": "João",
+        "MiddleName": "P",
+        "LastName": "Silva",
+        "PassengerId": "1",
+        "Status": "NEW",
+        "PassengerType": "Adult",
+        "Email": "emailpassageiro@dominio.com.br",
+        "Phone" : "552121114700",
+        "DateOfBirth": "1982-04-30"
+      }
     },
     {
       "ProductName": "Teclado",
@@ -716,20 +725,7 @@ Content-Type: application/json;charset=UTF-8
         "Destination": "EZE"
       }
     ]
-  },
-  "Passengers": [
-    {
-      "FirstName": "João",
-      "MiddleName": "P",
-      "LastName": "Silva",
-      "PassengerId": "1",
-      "Status": "NEW",
-      "PassengerType": "Adult",
-      "Email": "emailpassageiro@dominio.com.br",
-      "Phone" : "552121114700",
-      "DateOfBirth": "1982-04-30"
-    }
-  ]
+  }
 }
 ```
 - Quando os dados enviados para análise tiver alguma inconformidade nos valores, tamanhos permitidos e/ou tipos dos campos conforme especificação do manual.  
@@ -769,7 +765,7 @@ Content-Type: application/json;charset=UTF-8
   
 <a name="get_analise"></a>
 
-#### `GET`{:.http-get} Obtenção do Detalhe da Análise
+#### `GET`{:.http-get} Obtenção dos Detalhes da Análise
 -------------------------------------------------
 
 **PARÂMETROS:**  
@@ -885,7 +881,18 @@ Content-Type: application/json;charset=UTF-8
       "Description": "Uma description do Mouse",
       "ShippingInstructions": "Proximo ao 546",
       "ShippingMethod": "SameDay",
-      "ShippingTrackingNumber": "123456"
+      "ShippingTrackingNumber": "123456",
+      "Passenger": {
+        "FirstName": "João",
+        "MiddleName": "P",
+        "LastName": "Silva",
+        "PassengerId": "1",
+        "Status": "NEW",
+        "PassengerType": "Adult",
+        "Email": "emailpassageiro@dominio.com.br",
+        "Phone" : "552121114700",
+        "DateOfBirth": "1982-04-30"
+      }
     },
     {
       "ProductName": "Teclado",
@@ -932,20 +939,7 @@ Content-Type: application/json;charset=UTF-8
         "Destination": "EZE"
       }
     ]
-  },
-  "Passengers": [
-    {
-      "FirstName": "João",
-      "MiddleName": "P",
-      "LastName": "Silva",
-      "PassengerId": "1",
-      "Status": "NEW",
-      "PassengerType": "Adult",
-      "Email": "emailpassageiro@dominio.com.br",
-      "Phone" : "552121114700",
-      "DateOfBirth": "1982-04-30"
-    }
-  ]
+  }
 }
 ```
   
