@@ -7,11 +7,6 @@ next: /docs/1.0/autenticacao
 ---
 ---
 
-## Hosts
-
-**Test** https://riskhomolog.braspag.com.br  
-**Live** https://risk.braspag.com.br
-
 Serviço que envia um post de notificação ao cliente caso haja alguma alteração de status
 
 * É necessário solicitar ao Time de Implementação ([implantacao.operacoes@braspag.com.br](mailto:implantacao.operacoes@braspag.com.br)) o cadastramento da URL de mudança de status.
@@ -26,10 +21,14 @@ Para maior detalhes de como realizar o GET, consultar em Análise a sessão [Obt
 
 ![Notificação de Mudança de Status]({{ site.url }}/img/PostNotification.png){: .centerimg }{:title="Notificação de Mudança de Status "}
 
+## Hosts
+
+**Test** https://riskhomolog.braspag.com.br  
+**Live** https://risk.braspag.com.br
+
 #### `POST`{:.http-post} Notificação de Mudança de Status 
 ----------------------------------------------
 Abaixo exemplo de mensagem que o servidor da Braspag enviará à URL cadastrada, e como deve ser a resposta enviada em caso de sucesso.
-
 
 **REQUEST:**  
 

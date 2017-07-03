@@ -44,13 +44,13 @@ Este documento descreve o fluxo necessário para que aplicações **cliente** ob
 
 * Para se autenticar com a API do Antifraude, é necessário que sejam previamente criadas as credenciais **user** e **password**, as quais deverão ser solicitadas à equipe de implantação da Braspag.
 
-* Uma vez em posse dessas credenciais, será necessário "codificá-la" em  Base64, utilizando a convenção **"usuario:senha"**.
-<br/>Exemplo:
+* Uma vez em posse dessas credenciais, será necessário "codificá-la" em  Base64, utilizando a convenção **user:password**.  
+Exemplo:
 
-    * User: braspagtestes
-    * Password: 1q2w3e4r
-    * String a ser codificada em Base 64: **braspagtestes:1q2w3e4r**
-    * Resultado: YnJhc3BhZ3Rlc3RlczoxcTJ3M2U0cg==
+    * User: **braspagtestes**
+    * Password: **1q2w3e4r**
+    * String a ser codificada em Base64: **braspagtestes:1q2w3e4r**
+    * Resultado após a codificação: **YnJhc3BhZ3Rlc3RlczoxcTJ3M2U0cg==**
 
 **REQUEST:**  
 
@@ -58,7 +58,7 @@ Este documento descreve o fluxo necessário para que aplicações **cliente** ob
 POST https://authhomolog.braspag.com.br/oauth2/token HTTP/1.1
 Host: https://authhomolog.braspag.com.br
 Content-Type: application/x-www-form-urlencoded
-Authorization: Basic {StringCodificadaEmBase64}
+Authorization: Basic {Resultado_Da_String_Codificada_Em_Base64}
 Scope: AntifraudGatewayApp
 Cache-Control: no-cache
 
@@ -78,9 +78,10 @@ Content-Type: application/json;charset=UTF-8
   "expires_in": 599
 }
 ```
- 
- * Na resposta é importante ressaltar o campo **expires_in**, com o tempo de expiração to access_token em segundos.
 
-### Como obter uma credencial de usuário?  
+ * Na resposta é importante ressaltar o campo **expires_in**, com o tempo de expiração to access_token em segundos. Quando o token expirar, é necessário consumir o serviço novamente para obter um novo token.
 
-> Solicite uma credencial pelo e-mail [implantacao.operacoes@braspag.com.br](mailto:implantacao.operacoes@braspag.com.br)
+### Como obter uma credencial?  
+
+> Solicite uma credencial abrindo um ticket através da nossa ferramenta de suporte, enviando o(s) IP(s) de saída dos seus servidores de homologação e produção.  
+[Suporte Braspag](https://suporte.braspag.com.br/hc/pt-br)

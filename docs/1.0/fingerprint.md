@@ -6,10 +6,11 @@ previous: /docs/1.0/postnotification
 next: /docs/1.0/autenticacao
 ---
 
-Serviço que coleta impressão digital de dispositivos e geolocalização real do IP do comprador e cria uma *caixa preta*.  
-Esta *caixa preta* é uma sequência de caracteres criptografados que contêm todos os atributos do dispositivo.  
+Serviço que coleta impressão digital de dispositivos e geolocalização real do IP do comprador.  
 
 -----------------------------------
+
+## * ReDShield
 
 ## Integração com sua página de checkout(site)
 
@@ -277,3 +278,80 @@ public class DevicePrintSampleActivity extends Activity
 }
 
 ```
+
+## * Cybersource
+
+Será necessário adicionar uma imagem de 1-pixel, que não é mostrada na tela, e 2 segmentos de código à tag *<body>* da sua página de checkout, se certificando que serão necessários de 10 segundos entre a execução do código e a submissão da página para o servidor.  
+
+**IMPORTANTE!**  
+Se os 3 segmentos de código não forem colocados na página de checkout, os resultados podem não ser precisos.  
+
+**Colocando os segmentos de código e substituindo os valores das variáveis**  
+
+Coloque os segmentos de código imediatamente acima da tag *</body>* para garantir que a página Web será renderizada corretamente. Nunca adicione os segmentos de código em elementos HTML visíveis. Os segmentos de código precisam ser carregados antes que o comprador finalize o pedido de compra, caso contrário um erro será gerado.  
+
+Em cada segmento abaixo, substitua as variáveis com os valores referentes a loja e número do pedido.  
+
+* Domain:  
+    Testing - Use h.online-metrix.net, que é o DNS do servidor de fingerprint, como apresentado no exemplo de HTML abaixo.  
+    Production - Altere o domínio para uma URL local, e configure seu servidor Web para redirecionar esta URL para h.online-metrix.net.  
+
+**ProviderOrgId** - Para obter este valor, entre em contato com a Braspag.  
+**ProviderMerchantId** - Para obter este valor, entre em contato com a Braspag.  
+**ProviderSessionId** - Prencha este campo com o mesmo valor do campo **MerchantOrderId** que será enviado na requisição da análise de fraude.  
+
+* PNG Image  
+
+```html
+
+<html>
+<head></head>
+<body>
+    <form>
+        <p style="background:url(https://h.online-metrix.net/fp/clear.png?org_id=ProviderOrgId&amp;session_id=ProviderMerchantIdProviderSessionId&amp;m=1)"></p>  
+        <img src="https://h.online-metrix.net/fp/clear.png?org_id=ProviderOrgId&amp;session_id=ProviderMerchantIdProviderSessionId&amp;m=2" alt="">  
+    </form>
+</body>
+</html>
+
+```
+
+* Flash Code  
+
+```html
+
+<html>
+<head></head>
+<body>
+    <form>
+        <object type="application/x-shockwave-flash" data="https://h.online-metrix.net/fp/fp.swf?org_id=ProviderOrgId&amp;session_id=ProviderMerchantIdProviderSessionId" width="1" height="1" id="thm_fp">
+            <param name="movie" value="https://h.online-metrix.net/fp/fp.swf?org_id=ProviderOrgId&amp;session_id=ProviderMerchantIdProviderSessionId" />
+            <div></div>
+        </object>
+    </form>
+</body>
+</html>
+
+```
+
+* Javascript Code
+
+```html
+
+<html>
+<head></head>
+<script src="https://h.online-metrix.net/fp/check.js?org_id=ProviderOrgId&amp;session_id=ProviderMerchantIdProviderSessionId" type="text/javascript"></script>
+<body></body>
+</html>
+
+```
+
+**IMPORTANTE!**  
+Certifique-se de copiar todos os dados corretamente e de ter substituído as variáveis corretamente pelos respectivos valores.  
+
+**Configurando seu Servidor Web**  
+
+Na seção *Colocando os segmentos de código e substituindo os valores das variáveis (Domain)*, todos os objetos se referem a h.online-metrix.net, que é o DNS do servidor de fingerprint. Quando você estiver pronto para produção, você deve alterar o nome do servidor para uma URL local, e configurar no seu servidor Web um redirecionamento de URL para h.online-metrix.net.  
+
+**IMPORTANTE!**  
+Se você não completar essa seção, você não receberá resultados corretos, e o domínio (URL) do fornecedor de fingerprint ficará visível, sendo mais provável que seu consumidor o bloqueie.  
