@@ -1,7 +1,7 @@
 ---
 layout: post-full
 title: Configuração do Fingerprint
-featimg: fingerprint.png
+featimg: MapAntifraud.png
 category: [docs]
 ---
 

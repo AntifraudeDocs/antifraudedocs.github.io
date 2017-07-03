@@ -3,7 +3,7 @@ layout: page-classic-sidebar-left
 title: Associar transação Pagador e Antifraude
 featimg: MapAntifraud.png
 previous: /docs/1.0/retrochargeback
-next: /docs/1.0/analise
+next: /docs/1.0/updatestatus
 ---
 ---
 

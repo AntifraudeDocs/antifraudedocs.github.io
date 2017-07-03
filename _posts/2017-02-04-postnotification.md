@@ -1,7 +1,7 @@
 ---
 layout: post-full
 title: Notificação de Mudança de Status
-featimg: PostNotification.png
+featimg: MapAntifraud.png
 category: [docs]
 ---
 

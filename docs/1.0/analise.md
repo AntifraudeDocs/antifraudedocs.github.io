@@ -64,17 +64,17 @@ Identifica que é uma retentativa de uma análise. Este campo deve ser enviado c
 Número do cartão de crédito. `required`{:.custom-tag} `20`{:.custom-tag} `string`{:.custom-tag}. `Cybersource`{:.custom-provider-cyber}  
 
 **Card.Holder**{:.custom-attrib} `required`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
-Nome do cartão de crédito.
+Nome do cartão de crédito.  `required`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 
 **Card.ExpirationDate**{:.custom-attrib} `required`{:.custom-tag} `7`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Data de expiração do cartão de crédito. `required`{:.custom-tag} `7`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 Ex.: 01/2023
 
 **Card.CVV**{:.custom-attrib} `required`{:.custom-tag} `4`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
-Código de segurança do cartão de crédito.  
+Código de segurança do cartão de crédito.
 
 **Card.Brand**{:.custom-attrib} `required`{:.custom-tag} `10`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
-Bandeira do cartão de crédito.  
+Bandeira do cartão de crédito. `required`{:.custom-tag} `10`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 Bandeiras suportadas: Amex | Diners | Discover | JCB | Master | Dankort | Cartebleue | Maestro | Visa | Elo | Hipercard  
 
 **Card.EciThreeDSecure**{:.custom-attrib} `optional`{:.custom-tag} `1`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
@@ -103,7 +103,7 @@ Logradouro do endereço de cobrança. `required`{:.custom-tag} `54`{:.custom-tag
 Número do endereço de cobrança. `required`{:.custom-tag} `5`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 
 **Billing.Complement**{:.custom-attrib} `optional`{:.custom-tag} `14`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
-Complemento do endereço de cobrança.`optional`{:.custom-tag} `14`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
+Complemento do endereço de cobrança. `optional`{:.custom-tag} `14`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 
 **Billing.Neighborhood**{:.custom-attrib} `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Bairro do endereço de cobrança. `optional`{:.custom-tag} `45`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
@@ -139,7 +139,7 @@ Cidade do endereço de entrega. `optional`{:.custom-tag} `50`{:.custom-tag} `str
 **Shipping.State**{:.custom-attrib} `optional`{:.custom-tag} `2`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Estado do endereço de entrega. `optional`{:.custom-tag} `2`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 
-**Shipping.Country**{:.custom-attrib}  `optional`{:.custom-tag} `2`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
+**Shipping.Country**{:.custom-attrib} `optional`{:.custom-tag} `2`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 País do endereço de entrega. `optional`{:.custom-tag} `2`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 Mais informações em [ISO 2-Digit Alpha Country Code](https://www.iso.org/obp/ui)
 
@@ -180,7 +180,7 @@ Ex.: 5521988776655
 988776655 = Número do Celular  
 
 **Shipping.ShippingMethod**{:.custom-attrib} `optional`{:.custom-tag} `string`{:.custom-tag}  
-Meio de entrega. `optional`{:.custom-tag} `string`{:.custom-tag}  
+Meio de entrega.  
 Enum:  
 SameDay = Meio de entrega no mesmo dia `Cybersource`{:.custom-provider-cyber} `ReDShield`{:.custom-provider-red}  
 NextDay = Meio de entrega no próximo dia `Cybersource`{:.custom-provider-cyber} `ReDShield`{:.custom-provider-red}  
@@ -198,8 +198,8 @@ None = Sem meio de entrega, pois é um serviço ou assinatura. `Cybersource`{:.c
 Referências do endereço de entrega.
 
 **Customer.MerchantCustomerId**{:.custom-attrib} `required`{:.custom-tag} `16`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
-Número do documento de identificação do comprador. `required`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
-Ex.: CPF | CNPJ | Passaporte
+Número do documento de identificação do comprador. `required`{:.custom-tag} `16`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
+Ex.: CPF | CNPJ | CNH | Passaporte
 
 **Customer.FirstName**{:.custom-attrib} `required`{:.custom-tag} `30`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Primeiro nome do comprador. `required`{:.custom-tag} `60`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
@@ -221,15 +221,15 @@ Enum: Male | Female
 **Customer.Email**{:.custom-attrib} `optional`{:.custom-tag} `60`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 E-mail do comprador. `required`{:.custom-tag} `100`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 
+**Customer.Ip**{:.custom-attrib} `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
+Endereço de IP do comprador. `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
+
 **Customer.Phone**{:.custom-attrib} `optional`{:.custom-tag} `19`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Telefone do comprador. `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 Ex.: 552121114700  
 55 = Código do País  
 21 = DDD do estado  
 21114700 = Número do Telefone  
-
-**Customer.Ip**{:.custom-attrib} `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
-Endereço de IP do comprador. `optional`{:.custom-tag} `15`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 
 **Customer.Mobile**{:.custom-attrib} `optional`{:.custom-tag} `19`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Celular do comprador.  
@@ -252,7 +252,7 @@ New = Identifica quando o comprador é novo na loja, nunca fez uma compra.
 Existing = Identifica quando o comprador é existente na loja, já realizou uma compra.  
 
 **Customer.BrowserFingerPrint**{:.custom-attrib} `required`{:.custom-tag} `6005`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
-Impressão digital de dispositivos e geolocalização real do IP do comprador.
+Impressão digital de dispositivos e geolocalização real do IP do comprador. `required`{:.custom-tag} `50`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 [Configuração do Fingerprint]({{ site.baseurl }}{% link docs/1.0/fingerprint.md %})  
 
 **Customer.BrowserHostName**{:.custom-attrib} `optional`{:.custom-tag} `60`{:.custom-tag} `string`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
@@ -281,7 +281,7 @@ High = Produto associado com muito chargebacks.
 Preço unitário do produto. `required`{:.custom-tag} `long`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
 Ex.: 10950 (Valor equivalente a R$109,50)  
 
-**CartItem[n].OriginalPrice**{:.custom-attrib} `optional`{:.custom-tag} `long`{:.custom-tag} `Cybersource`{:.custom-provider-cyber}  
+**CartItem[n].OriginalPrice**{:.custom-attrib} `optional`{:.custom-tag} `long`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Preço original do produto.  
 Ex.: 11490 (Valor equivalente a R$114,90)  
 
@@ -435,10 +435,10 @@ Nível aceitável de risco para cada produto.
 
 <!--**CustomerConfigurationData.AccessTokenS**{:.custom-attrib}  `optional`{:.custom-tag} `255`{:.custom-tag} `string`{:.custom-tag}  -->
 
-**MerchantDefinedData.Key**{:.custom-attrib}  `optional`{:.custom-tag} `string`{:.custom-tag}  
+**MerchantDefinedData.Key**{:.custom-attrib} `optional`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Campo definido junto ao provedor de antifraude.
 
-**MerchantDefinedData.Value**{:.custom-attrib} `optional`{:.custom-tag} `string`{:.custom-tag}  
+**MerchantDefinedData.Value**{:.custom-attrib} `optional`{:.custom-tag} `string`{:.custom-tag} `ReDShield`{:.custom-provider-red}  
 Campo definido junto ao provedor de antifraude.  
 
 Obs.: Entre os 15 campos disponíveis para customização, 5 são de tamanho de 256 caracteres alphanuméricos e 10 são de tamanho de 32 caracteres alphanuméricos.  
@@ -539,7 +539,7 @@ Other = Pagamentos com outros métodos.
 ## Atributos do Response
 -----------------------------------
 
-**AnalysisResult.Id** `Cybersource`{:.custom-provider-cyber} `ReDShield`{:.custom-provider-red}  
+**Id** `Cybersource`{:.custom-provider-cyber} `ReDShield`{:.custom-provider-red}  
 Id da transação no Antifraude Gateway Braspag.  
 
 **Analysis.Score** `Cybersource`{:.custom-provider-cyber} `ReDShield`{:.custom-provider-red}  
@@ -575,7 +575,7 @@ Tipo da bandeira.
 Possíveis Valores: Maestro Internacional | Maestro UK Domestic | Mastercard Credit | Mastercard Debit | Visa Credit | Visa Debit | Visa Electron  
 
 **AnalysisResult.CasePriority** `Cybersource`{:.custom-provider-cyber}  
-Defini o nível de prioridade das regras ou perfis do lojista.  
+Define o nível de prioridade das regras ou perfis do lojista.  
 Este campo somente será retornado se a loja for assinante do Enhanced Case Management.  
 O nível de prioridade varia de 1 (maior) a 5 (menor) e o valor padrão é 3, e este será atribuído caso não tenha definido a prioridade das regras ou perfis.  
 
@@ -684,7 +684,7 @@ Lista de identificadores das regras que foram gerados no momento do cadastro das
 Flag identificando que o browser do comprador estava habilitado para armazenar cookies temporariamente no momento da compra.  
 
 **AnalysisResult.DeviceFingerprint.FlashEnabled** `Cybersource`{:.custom-provider-cyber}  
-Flag identificando que o browser do comprador habilitado a execuação de conteúdos em Flash no momento da compra.  
+Flag identificando que o browser do comprador habilitado a execução de conteúdos em Flash no momento da compra.  
 
 **AnalysisResult.DeviceFingerprint.Hash** `Cybersource`{:.custom-provider-cyber}  
 Hash gerado a partir dos dados coletados pelo script de fingerprint.  
@@ -693,7 +693,7 @@ Hash gerado a partir dos dados coletados pelo script de fingerprint.
 Flag identificando que o browser do comprador estava com cache de imagens habilitado no momento da compra.  
 
 **AnalysisResult.DeviceFingerprint.JavascriptEnabled** `Cybersource`{:.custom-provider-cyber}  
-Flag identificando que o browser do comprador estava com a execuação de sripts em Javascript habilitada no momento da compra.  
+Flag identificando que o browser do comprador estava com a execução de sripts em Javascript habilitada no momento da compra.  
 
 **AnalysisResult.DeviceFingerprint.TrueIpAddress** `Cybersource`{:.custom-provider-cyber}  
 Flag identificando que o IP do comprador é real.  
@@ -734,7 +734,7 @@ Obter detalhes da análise da transação
 #### `POST`{:.http-post} Análise da Transação 
 -------------------------------------------
 
-**REQUEST - ReDSHIELD**  
+**REQUEST - REDSHIELD**  
 
 ``` http
 POST https://riskhomolog.braspag.com.br/Analysis/ HTTP/1.1
@@ -855,7 +855,7 @@ MerchantId: {Id da Loja no Antifraude Gateway}
 }
 ```
 
-**RESPONSE - ReDShield**  
+**RESPONSE - REDSHIELD**  
 
 - Quando a transação tiver a análise realizada.  
 
